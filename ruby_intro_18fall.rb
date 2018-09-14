@@ -128,9 +128,17 @@ class Book
     rem=((b[1].round(2))*100).to_i
     # puts rem
     if(rem==0)
-      return "#{b[0]}" + "dollars only"
+      if(b[0]==1)
+        return "1 dollar only"
+      else
+        return "#{b[0]}" + "dollars only"
+      end
     else
-      return "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
+      if (rem==0.01)
+        return "#{b[0]}" + " dollars and 1 cent only"
+      else
+        return "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
+      end
     end
   end
 
