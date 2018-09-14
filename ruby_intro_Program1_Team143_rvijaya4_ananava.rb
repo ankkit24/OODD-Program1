@@ -104,23 +104,31 @@ end
 # Part 3
 class Book
   # ADD YOUR CODE HERE
-
-  def initialize *args
-
-    #instance variables in ruby are always private
-    @bname,@bprice = args
-
-    if (@bname==''||@bname==nil)
-      raise ArgumentError
+  def initialize (name, price)
+    if name.nil? || name.length==0
+      raise ArgumentError.new("Invalid name specified")
     end
-    if (@bprice==nil||@bprice<=0)
-      raise ArgumentError
+    if price.nil? or price<=0
+      raise ArgumentError.new("Invalid price specified")
     end
-
+    @name=name
+    @price=price
+  end
+  def get_name
+    @name
+  end
+  def get_price
+    @price
+  end
+  def set_name(name)
+    @name=name
+  end
+  def set_price(price)
+    @price=price
   end
 
   def formatted_price
-    book_price=@bprice
+    book_price=@price
 
     #use to_i to convert to an integer
     # divmod 1 divides the number into an array of before and after decimals
@@ -135,10 +143,10 @@ class Book
     # puts rem
     if(rem==0)
       if(b[0]==1)
-        #puts "1 dollar only"
+        puts "1 dollar only"
         return "1 dollar only"
       else
-        #puts "#{b[0]}" + " dollars only"
+        puts "#{b[0]}" + " dollars only"
         return "#{b[0]}" + " dollars only"
       end
     else
