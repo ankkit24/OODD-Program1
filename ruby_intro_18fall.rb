@@ -126,24 +126,36 @@ class Book
     # divmod 1 divides the number into an array of before and after decimals
     b=book_price.divmod 1
     rem=((b[1].round(2))*100).to_i
+    if(rem==100)
+      b[0]+=1
+      puts b[0]
+      rem=0
+      puts rem
+    end
     # puts rem
     if(rem==0)
       if(b[0]==1)
+        #puts "1 dollar only"
         return "1 dollar only"
       else
-        return "#{b[0]}" + "dollars only"
+        #puts "#{b[0]}" + " dollars only"
+        return "#{b[0]}" + " dollars only"
       end
     else
       if (rem==0.01)
         if(b[0]==1)
+          #puts "1 dollar and 1 cent only"
           return "1 dollar and 1 cent only"
         else
+          #puts "#{b[0]}" + " dollars and 1 cent only"
           return "#{b[0]}" + " dollars and 1 cent only"
         end
       else
         if(b[0]==1)
+          #puts "1 dollar and " + "#{rem}" + " cents only"
           return "1 dollar and " + "#{rem}" + " cents only"
         else
+          #puts "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
           return "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
         end
       end
