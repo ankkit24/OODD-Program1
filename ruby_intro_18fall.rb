@@ -135,9 +135,17 @@ class Book
       end
     else
       if (rem==0.01)
-        return "#{b[0]}" + " dollars and 1 cent only"
+        if(b[0]==1)
+          return "1 dollar and 1 cent only"
+        else
+          return "#{b[0]}" + " dollars and 1 cent only"
+        end
       else
-        return "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
+        if(b[0]==1)
+          return "1 dollar and " + "#{rem}" + " cents only"
+        else
+          return "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
+        end
       end
     end
   end
