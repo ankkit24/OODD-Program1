@@ -2,20 +2,27 @@
 
 def unique_array(a)
   # ADD YOUR CODE HERE
-  # puts "Printing unique elements:"
-  # print a.uniq
-  return a.uniq
+  b=a.uniq
+  puts "#{b}"
+  return b
 end
 
 def two_sum?(a,n)
   # ADD YOUR CODE HERE
-  for counter in 0..a.length-1
-    for i in counter+1..a.length-1
-      if (a.at(counter)+a.at(i)==n)
-        return true
-      end
+  found=0
+  array=a.combination(2).to_a
+  array.each do |x|
+    if x.sum==n
+      found+=1
     end
-     puts
+  end
+
+  if found>0
+    puts "true"
+    return true
+  else
+    puts "false"
+    return false
   end
 end
 
@@ -23,12 +30,12 @@ def group_anagrams(a)
   # ADD YOUR CODE HERE
   b=Array.new
   for i in 0..a.length-1
-      total=0
-      a.at(i).each_byte do |c|
-        total+=c
-      end
-      b[i]=total
-   # puts b[i]
+    total=0
+    a.at(i).each_byte do |c|
+      total+=c
+    end
+    b[i]=total
+    # puts b[i]
   end
   for i in 0..a.length-1
     key=b[i]
@@ -40,12 +47,7 @@ def group_anagrams(a)
       end
     end
   end
-  # puts a
-  # puts b
-  # a=["restful","hour","fluster","rouh"]
 
-  #Printing in the required order
-  # Works for both single and double quotes
   g_anagrams=Array.new
   i=0
   while (i<=a.length-1)
@@ -60,6 +62,7 @@ def group_anagrams(a)
     g_anagrams.push(c)
     i+=2
   end
+  puts "#{g_anagrams}"
   return g_anagrams
 end
 
@@ -67,41 +70,38 @@ end
 
 def palindrome?(s)
   # ADD YOUR CODE HERE
-  # Use either downcase! or upcase! to convert and store in the variable
-  s.downcase!
-  if(s==s.reverse)
+  if s.casecmp(s.reverse)==0
+    puts "true"
     return true
+  else
+    puts "false"
+    return false
   end
 end
 
 def remove_and_append_vowels(s)
   # ADD YOUR CODE HERE
-    return s.gsub(/[aeiou]/,"")+s.gsub(/[^aeiou]/,"")
+  puts s.gsub(/[aeiou]/,"")+s.gsub(/[^aeiou]/,"")
+  return s.gsub(/[aeiou]/,"")+s.gsub(/[^aeiou]/,"")
 end
 
 def highest_frequency_word(s)
   # ADD YOUR CODE HERE
-  s.downcase!
-  a=s.split
-  prev_counter=0
-  for i in 0..a.length-1
-    # key=a[i]
-    counter=0
-    for j in 0..a.length-1
-      if(a[j]==a[i])
-        counter+=1
-      end
-    end
-    if(counter>prev_counter)
-      prev_counter=counter
-      string=a[i]
-    end
+  arr=s.split(" ")
+  #puts "#{arr}"
+  count=Hash.new(0)
+  arr.each do |x|
+    count[x.downcase]+=1
   end
-  return string
+  #puts "#{count}"
+  max_count=count.values.max
+  #puts "#{max_count}"
+  word=count.key(max_count).downcase
+  puts "#{word}"
+  return word
 end
 
 # Part 3
-
 class Book
   # ADD YOUR CODE HERE
 
@@ -144,18 +144,18 @@ class Book
     else
       if (rem==0.01)
         if(b[0]==1)
-          #puts "1 dollar and 1 cent only"
+          puts "1 dollar and 1 cent only"
           return "1 dollar and 1 cent only"
         else
-          #puts "#{b[0]}" + " dollars and 1 cent only"
+          puts "#{b[0]}" + " dollars and 1 cent only"
           return "#{b[0]}" + " dollars and 1 cent only"
         end
       else
         if(b[0]==1)
-          #puts "1 dollar and " + "#{rem}" + " cents only"
+          puts "1 dollar and " + "#{rem}" + " cents only"
           return "1 dollar and " + "#{rem}" + " cents only"
         else
-          #puts "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
+          puts "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
           return "#{b[0]}" + " dollars and " + "#{rem}" + " cents only"
         end
       end
