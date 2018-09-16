@@ -2,13 +2,39 @@
 
 def unique_array(a)
   # ADD YOUR CODE HERE
+  # 1. Check if the array is null
+  if a==[]
+    puts "Array cannot be empty"
+    return a
+  end
+  #2. Check if there are different data types as well
+  bool = a.all? {|i| i.is_a?(Integer)}
+  if bool==false
+    puts "Array cannot have different data types"
+    return bool
+  end
+  #3. Normal case
   b=a.uniq
   puts "#{b}"
   return b
 end
 
+
+
 def two_sum?(a,n)
   # ADD YOUR CODE HERE
+  # 1. Check if the array is null
+  if a==[]
+    puts "Array cannot be empty"
+    return a
+  end
+  #2. Check if there are different data types as well
+  bool = a.all? {|i| i.is_a?(Integer)}
+  if bool==false
+    puts "Array cannot have different data types"
+    return bool
+  end
+  #3. Normal case
   found=0
   array=a.combination(2).to_a
   array.each do |x|
@@ -26,10 +52,13 @@ def two_sum?(a,n)
   end
 end
 
+
+
 def group_anagrams(a)
   # ADD YOUR CODE HERE
   b=Array.new
   for i in 0..a.length-1
+    a[i].downcase!
     total=0
     a.at(i).each_byte do |c|
       total+=c
@@ -66,10 +95,22 @@ def group_anagrams(a)
   return g_anagrams
 end
 
+
+
 # Part 2
 
 def palindrome?(s)
   # ADD YOUR CODE HERE
+  # 1. Null string
+  if(s=="")
+    puts "String cannot be null"
+    return false
+  end
+  #2. String cannot have blank spaces
+  if (s.match(/\s/))
+    puts "No spaces allowed in the string"
+    return false
+  end
   if s.casecmp(s.reverse)==0
     puts "true"
     return true
@@ -79,14 +120,42 @@ def palindrome?(s)
   end
 end
 
+
+
 def remove_and_append_vowels(s)
   # ADD YOUR CODE HERE
-  puts s.gsub(/[aeiou]/,"")+s.gsub(/[^aeiou]/,"")
-  return s.gsub(/[aeiou]/,"")+s.gsub(/[^aeiou]/,"")
+  # 1. Null string
+  if(s=="")
+    puts "String cannot be null"
+    return false
+  end
+
+  #2. String cannot have blank spaces
+  if (s.match(/\s/))
+    puts "No spaces allowed in the string"
+    return false
+  end
+
+ #3. There are no vowels in upper or lower case
+  if((s.downcase).gsub(/[aeiou]/,"")==s)
+    puts "No Vowels present"
+  end
+
+  #4. Adding the condition where the Vowels can be in upper case
+  puts s.gsub(/[aeiouAEIOU]/,"")+s.gsub(/[^aeiouAEIOU]/,"")
+  return s.gsub(/[aeiouAEIOU]/,"")+s.gsub(/[^aeiouAEIOU]/,"")
 end
+
+
 
 def highest_frequency_word(s)
   # ADD YOUR CODE HERE
+  # 1. Null string
+  if(s=="")
+    puts "String cannot be null"
+    return false
+  end
+
   arr=s.split(" ")
   #puts "#{arr}"
   count=Hash.new(0)
@@ -95,25 +164,41 @@ def highest_frequency_word(s)
   end
   #puts "#{count}"
   max_count=count.values.max
+
+  # 2. When max_count is 1, it means all words are unique
+  if(max_count==1)
+    puts "All words are unique"
+    return false
+  end
   #puts "#{max_count}"
   word=count.key(max_count).downcase
   puts "#{word}"
   return word
 end
 
+
+
 # Part 3
 class Book
   # ADD YOUR CODE HERE
   def initialize (name, price)
+    # #1. Check if price is a string
+    if (price.is_a? (String))
+      puts "Price cannot be a string value, it has to be an number"
+    end
+
     if name.nil? || name.length==0
       raise ArgumentError.new("Invalid name specified")
     end
     if price.nil? or price<=0
       raise ArgumentError.new("Invalid price specified")
     end
-    @name=name
-    @price=price
+
+    # Calling the setter methods for name and price
+    set_name(name)
+    set_price(price)
   end
+
   def get_name
     @name
   end
@@ -128,9 +213,8 @@ class Book
   end
 
   def formatted_price
-    book_price=@price
-
-    #use to_i to convert to an integer
+    book_price =get_price
+    # use to_i to convert to an integer
     # divmod 1 divides the number into an array of before and after decimals
     b=book_price.divmod 1
     rem=((b[1].round(2))*100).to_i

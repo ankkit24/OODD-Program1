@@ -1,5 +1,6 @@
 
 load 'ruby_intro_Program1_Team143_rvijaya4_ananava.rb'
+#load 'ruby_into_18fall.rb'
 
 def scores
   correct = 0
@@ -8,6 +9,11 @@ def scores
 
   # Q1
   begin
+    #1. check empty array
+    #unique_array([]) == [] ? correct+=1 : wrong+=1
+    #2. Check for different data types
+    #unique_array([1,2,3,-4,-5,3,2]) == false ? correct+=1 : wrong+=1
+    #3. Normal case
     unique_array([1,2,3,-4,-5,1,3,2]) == [1,2,3,-4,-5] ? correct+=1 : wrong+=1
   rescue
     wrong+=1
@@ -50,7 +56,7 @@ def scores
 
   #Q7
   begin
-    b2 = Book.new("The Great Gatsby", 17.994668)
+    b2 = Book.new("The Great Gatsby", 17.99466 )
   rescue
     b2 = nil
   end
